@@ -1,0 +1,17 @@
+language: perl
+perl:
+- '5.18'
+- '5.20'
+- '5.22'
+matrix:
+  fast_finish: true
+install:
+- cpanm --quiet --notest --skip-satisfied Dist::Zilla
+- dzil authordeps          --missing | grep -vP '[^\w:]' | xargs -n 2 -P 4 cpanm
+  --quiet --notest
+- dzil listdeps   --author --missing | grep -vP '[^\w:]' | xargs -n 2 -P 4 cpanm
+  --quiet --notest
+- git clone git@github.com:dwburke/dbix-class-objects.git
+script:
+- dzil smoke --release --author
+sudo: false

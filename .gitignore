@@ -1,0 +1,4 @@
+README.pod
+/DBIx-Class-Objects-*
+/.build
+!META.json

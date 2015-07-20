@@ -11,7 +11,6 @@ use DBIx::Class::Objects::Role::Result ();
 use Class::Load 'try_load_class';
 use namespace::autoclean;
 
-our $VERSION = '0.04';
 
 has 'schema' => (
     is       => 'ro',
@@ -245,7 +244,7 @@ sub _add_methods {
 sub _debug {
     my ( $self, $message ) = @_;
     return unless $self->debug;
-    warn "$message\n";
+    warn sprintf("%s :: %s\n", scalar localtime, $message);
 }
 
 __PACKAGE__->meta->make_immutable;
@@ -257,10 +256,6 @@ __END__
 =head1 NAME
 
 DBIx::Class::Objects - Rewrite your DBIC objects via inheritance
-
-=head1 VERSION
-
-0.04
 
 =head1 SYNOPSIS
 

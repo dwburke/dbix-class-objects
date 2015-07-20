@@ -1,5 +1,9 @@
 Revision history for DBIx-Class-Objects
 
+0.05    2015-07-20
+        - die if objectset has compile error during load_objects()
+        - convert build to Dist::Zilla
+
 0.04    2015-07-03
         - Remove 'find' wrapper, add 'single' and 'create' wrapper 
           - Lars Balker
