@@ -68,7 +68,7 @@ Related object: L<Sample::Schema::Result::User>
 =cut
 
 __PACKAGE__->belongs_to(
-  "username",
+  "user",
   "Sample::Schema::Result::User",
   { username => "username" },
   {

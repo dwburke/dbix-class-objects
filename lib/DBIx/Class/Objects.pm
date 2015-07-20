@@ -139,10 +139,17 @@ sub load_objects {
 
         $self->_debug("Trying to load $object_class");
 
-        if ( try_load_class($object_class) ) {
+        my ($result, $error) = try_load_class( $object_class );
+
+        if ( $result ) {
             $self->_debug("\t$object_class found.");
         }
         else {
+
+            if ( $error =~ /Compilation failed in require/ ) {
+                die $error;
+            }
+
             $self->_debug("\t$object_class not found. Building.");
             Moose::Meta::Class->create(
                 $object_class,

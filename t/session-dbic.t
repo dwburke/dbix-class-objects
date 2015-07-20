@@ -1,6 +1,5 @@
 use Test::Most;
 use lib 't/lib';
-use My::Objects;
 use My::Fixtures;
 use Sample::Schema;
 
@@ -8,16 +7,9 @@ my $schema = Sample::Schema->test_schema;
 
 my $fixtures = My::Fixtures->new( { schema => $schema } );
 $fixtures->load('user');
-my $objects = My::Objects->new(
-    {   schema      => $schema,
-        object_base => 'My::Object::',
-        debug       => 0,
-    }
-);
-$objects->load_objects;
 
-my $user = $objects->objectset('User')->first;
-my $session = $objects->objectset('Session')->first;
+my $user = $schema->resultset('User')->first;
+my $session = $schema->resultset('Session')->first;
 
 my $uid = $user->username;
 $session->username($uid);
@@ -31,14 +23,13 @@ is $db_session->username, $user->username, "...and that's actually in the db now
 $db_session->username($uid);
 $db_session->update();
 
-$session = $objects->objectset('Session')->first; # why must moose obj be reloaded?
+$session = $schema->resultset('Session')->first; # why must moose obj be reloaded?
 
-is ref($session->user), "My::Object::User", "username refers to the right class now";
-is ref($db_session->user), "Sample::Schema::Result::User", "...ditto for dbic";
+isa_ok $session->user, "Sample::Schema::Result::User", "user refers to the right class";
 
 $session->username(undef);
 $session->update();
 
-is $session->username, undef, "nulling the relation works";
+is $session->user, undef, "nulling the relation works";
 
 done_testing;
