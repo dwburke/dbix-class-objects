@@ -33,8 +33,8 @@ $db_session->update();
 
 $session = $objects->objectset('Session')->first; # why must moose obj be reloaded?
 
-is ref($session->username), "My::Object::User", "username refers to the right class now";
-is ref($db_session->username), "Sample::Schema::Result::User", "...ditto for dbic";
+is ref($session->user), "My::Object::User", "username refers to the right class now";
+is ref($db_session->user), "Sample::Schema::Result::User", "...ditto for dbic";
 
 $session->username(undef);
 $session->update();
