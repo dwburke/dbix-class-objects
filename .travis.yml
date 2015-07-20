@@ -5,7 +5,7 @@ perl:
 matrix:
   fast_finish: true
 install:
-- cpanm --quiet --notest --skip-satisfied Dist::Zilla
+- cpanm --quiet --notest --skip-satisfied Dist::Zilla DateTime::Format::SQLite
 - dzil authordeps          --missing | grep -vP '[^\w:]' | xargs -n 2 -P 4 cpanm
   --quiet --notest
 - dzil listdeps   --author --missing | grep -vP '[^\w:]' | xargs -n 2 -P 4 cpanm
