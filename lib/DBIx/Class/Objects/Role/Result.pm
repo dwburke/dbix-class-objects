@@ -1,4 +1,5 @@
 package DBIx::Class::Objects::Role::Result;
+
 use MooseX::Role::Parameterized;
 use DBIx::Class::Objects::Attribute::Trait::DBIC;
 use DBIx::Class::Objects::Util 'class_name_to_private_accessor';

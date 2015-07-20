@@ -247,10 +247,6 @@ __END__
 
 DBIx::Class::Objects - Rewrite your DBIC objects via inheritance
 
-=head1 VERSION
-
-0.04
-
 =head1 SYNOPSIS
 
     my $schema = My::DBIx::Class::Schema->connect(@args);
