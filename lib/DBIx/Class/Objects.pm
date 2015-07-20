@@ -53,6 +53,13 @@ has 'object_base' => (
     writer   => '_set_object_base',
 );
 
+has 'load_objects_called' => (
+    is       => 'rw',
+    isa      => 'Bool',
+    init_arg => undef,
+    default  => 0,
+);
+
 around 'BUILDARGS' => sub {
     my $orig = shift;
     my $self = shift;
@@ -132,6 +139,9 @@ sub _create_object_set {
 sub load_objects {
     my $self   = shift;
     my $schema = $self->schema;
+
+    die "load_objects() called twice" if $self->load_objects_called;
+    $self->load_objects_called( 1 );
 
     apply_all_roles( $self->base_class, @{ $self->roles } ) if scalar(@{ $self->roles });
 

@@ -3,6 +3,7 @@ use lib 't/lib';
 use My::Objects;
 use My::Fixtures;
 use Sample::Schema;
+use Test::Exception;
 
 my $schema = Sample::Schema->test_schema;
 
@@ -17,6 +18,10 @@ my $objects = My::Objects->new(
     }
 );
 $objects->load_objects;
+
+dies_ok {
+	$objects->load_objects;
+} 'second call to load_objects() dies';
 
 my $person_result = $fixtures->get_result('person_without_customer');
 my $person = My::Object::Person->new( { result_source => $person_result, object_source => $objects } );
