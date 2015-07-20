@@ -227,7 +227,7 @@ sub _add_methods {
 sub _debug {
     my ( $self, $message ) = @_;
     return unless $self->debug;
-    warn "$message\n";
+    warn sprintf("%s :: %s\n", scalar localtime, $message);
 }
 
 __PACKAGE__->meta->make_immutable;
