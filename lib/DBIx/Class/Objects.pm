@@ -11,7 +11,6 @@ use DBIx::Class::Objects::Role::Result ();
 use Class::Load 'try_load_class';
 use namespace::autoclean;
 
-our $VERSION = '0.04';
 
 has 'schema' => (
     is       => 'ro',
